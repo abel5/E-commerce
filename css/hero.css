@@ -1,0 +1,29 @@
+.home-container {
+padding-top: 110px;
+}
+
+.home-page {
+background-image: url("../images/5e05b4172e07b18d9428619e26697682.jpg");
+background-position: right;
+background-repeat: no-repeat;
+background-size: 40%;
+height: 400px;
+padding: 5rem 5rem;
+box-shadow: -3px 5px 12px rgba(0, 0, 0, 0.03);
+}
+
+.home-page-contents {
+width: 400px;
+}
+
+.home-page-contenst-header {
+color: var(--color-1);
+font-weight: 1000;
+}
+
+.home-page-contenst-body {
+color: black;
+font-weight: 400;
+margin: 1rem 0;
+font-size: 1rem;
+}

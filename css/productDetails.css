@@ -1,0 +1,117 @@
+.products-detail-section{
+   padding: 0 2rem 1rem 2rem;
+   display: none;
+}
+
+.detail-header-container{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 1rem 5rem 1rem 2rem;
+   background: rgb(241, 232, 214);
+   overflow: hidden;
+   height: 200px;
+}
+
+.product-details-header-img{
+    width: 150px;
+    margin-bottom: -1rem;
+}
+.product-detail-header-contents{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.product-detail-section-body-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+}
+.found-products-list-container{
+ display: flex;
+ flex-direction: column;
+ gap: 1rem;
+}
+.every-product-details-btn{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.every-detail-btn{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--card-color);
+    padding: 0.2rem 0.5rem;
+    border-radius: 20px;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.every-detail-btn:hover{
+    background: #cecdcd;
+}
+.product-detail-section-main-body{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.found-products-list{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 1rem;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 30px 0;
+}
+.page-numbers {
+    display: flex;
+    gap: 8px;
+    background: none;
+}
+
+.pagination button {
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+     border-radius: 50%;
+     transition: 0.3s;
+}
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.prev-btn:hover:not(:disabled){
+    background: rgb(198, 196, 196);
+}
+
+.next-btn:hover:not(:disabled){
+    background: rgb(198, 196, 196);
+}
+
+.page-numbers button.active {
+    background: var(--color-1);
+    color: white;
+}
+.page-numbers button.active:hover{
+    background: rgb(11, 55, 18);
+}
+.page-numbers button:hover:not(.active){
+    background: rgb(198, 196, 196);
+}
+
+
+.product-filter-dropdown{
+    position: absolute;
+    color: black;
+    top: 63%;
+    z-index: 200000;
+    background: #cecdcd;
+    padding: 1rem;
+}
