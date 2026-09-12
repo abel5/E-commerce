@@ -1,3 +1,4 @@
+
 import {products,popularCategories} from "../data/products.js";
 import {createProductCard,creatPopularCard,createSearchedCard} from "../components/productCard.js";
 import { hideSections } from "../features/dealCategories.js";
@@ -422,4 +423,3 @@ renderProducts(products.beauty,beautyListsContainer);
 renderProducts(products.fitness,fitnessListsContainer);
 renderProducts(products.furniture,furnitureListsContainer);
 renderProducts(products.sneakers,sneakerListsContainer);
-

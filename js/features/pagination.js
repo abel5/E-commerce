@@ -1,6 +1,5 @@
 import { createProductCard } from "../components/productCard.js";
 
-
 const pagination = document.querySelector(".pagination");
 const prevBtn = document.querySelector(".prev-btn");
 const pageNumbers = document.querySelector(".page-numbers");
