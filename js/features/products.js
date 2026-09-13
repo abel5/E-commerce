@@ -3,9 +3,10 @@ import {products,popularCategories} from "../data/products.js";
 import {createProductCard,creatPopularCard,createSearchedCard} from "../components/productCard.js";
 import { hideSections } from "../features/dealCategories.js";
 import { categoryDetails } from "../data/products.js";
-import { renderFoundProducts } from "../features/pagination.js";
+import { renderFoundProducts, renderMostSellingProducts, renderTodayBest, renderWeeklyPopularProduct } from "../features/pagination.js";
 import { resetCurrentPage } from "../features/pagination.js";
 import { resetSearchBar } from "./search.js";
+
 // HOMEPAGE CONTAINERS
 const gadgetListsContainer =document.querySelector(".gadget-lists-container");
 const fashionListsContainer =document.querySelector(".fashion-lists-container");
@@ -34,6 +35,9 @@ const sortBtn =document.querySelector(".sort-btn");
 const popularCategoriesSection =document.querySelector(".popular-categories-section");
 const categoryArrow =document.querySelector(".category-arrow");
 const searchResultSection =document.querySelector(".search-results-section");
+const bestDealProductLists=document.querySelector(".best-deal-product-lists");
+const mostSellingProductsList=document.querySelector(".most-selling-products-list");
+const weeklyPopularProductsList=document.querySelector(".weekly-popular-product-lists");
 // GET ALL PRODUCTS
 
 const allProducts=Object.values(products).flat();
@@ -411,8 +415,9 @@ function createDropdown(button,property,filterName,formatValue){
         })
     
 
-
-
+renderWeeklyPopularProduct(allProducts,weeklyPopularProductsList);
+renderMostSellingProducts(allProducts,mostSellingProductsList);
+renderTodayBest(allProducts,bestDealProductLists);        
 renderPopularProduct(popularCategories,popularCategoriesContainer);
 renderProducts(products.gadgets,gadgetListsContainer);
 renderProducts(products.fashion,fashionListsContainer);

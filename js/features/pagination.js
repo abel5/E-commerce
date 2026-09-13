@@ -1,10 +1,22 @@
 import { createProductCard } from "../components/productCard.js";
+import { displaySection, hideSections } from "./dealCategories.js";
+import { backSection } from "./dealCategories.js";
+
 
 const pagination = document.querySelector(".pagination");
 const prevBtn = document.querySelector(".prev-btn");
 const pageNumbers = document.querySelector(".page-numbers");
 const nextBtn = document.querySelector(".next-btn");
+const arrowBackIcon=document.querySelector(".arrow-back-icon");
 
+const productsDetailSection =document.querySelector(".products-detail-section");
+
+arrowBackIcon.addEventListener("click",()=>{
+if(productsDetailSection.style.display==="block"){
+    backSection(productsDetailSection);
+}
+ 
+})
 
 let currentPage = 1;
 const productsPerPage = 4;
@@ -105,4 +117,46 @@ export function renderFoundProducts(products, container) {
 
     };
 
+}
+
+export function renderTodayBest(products,container){
+
+    if(!container) return;
+    container.innerHTML="";
+const filteredProducts=products.filter(product=>product.rating>=4.5);
+    const chosenProduct=[...filteredProducts].sort(()=>Math.random()-0.5).slice(0,4);
+    chosenProduct.forEach(product=>{
+        const todayProductCard=createProductCard(product);
+      
+        container.appendChild(todayProductCard);
+        
+    })
+
+}
+
+export function renderMostSellingProducts(products,container){
+    if(!container) return;
+    container.innerHTML="";
+    const filteredProducts=products.filter(product=>product.reviews>=1000);
+    const chosenProduct=[...filteredProducts].sort(()=>Math.random()-0.5).slice(0,4);
+
+    chosenProduct.forEach(product=>{
+        const mostSellingCard=createProductCard(product);
+
+        container.appendChild(mostSellingCard);
+    })
+
+}
+
+export function renderWeeklyPopularProduct(products,container){
+if(!container) return;
+container.innerHTML="";
+
+const filteredProducts=products.filter(product=>product.reviews>=1200);
+const chosedProduct=[...filteredProducts].sort(()=>Math.random()-1).slice(0,4);
+chosedProduct.forEach(product=>{
+    const weeklyPopularProducts=createProductCard(product);
+
+    container.appendChild(weeklyPopularProducts);
+})
 }

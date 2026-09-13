@@ -57,7 +57,7 @@ dealLinks.forEach(link => {
 
 });
 
-function displaySection(section) {
+export function displaySection(section) {
 
 
 [
@@ -77,6 +77,30 @@ function displaySection(section) {
 
 
 section.style.display = "flex";
+
+
+}
+
+export function backSection(section) {
+
+
+[
+    fashionListsContainer,
+    gadgetListsContainer,
+    toyListsContainer,
+    educationListsContainer,
+    fitnessListsContainer,
+    beautyListsContainer,
+    furnitureListsContainer,
+    sneakerListsContainer
+].forEach(item => {
+
+    item.style.display = "flex";
+
+});
+
+
+section.style.display = "none";
 
 
 }

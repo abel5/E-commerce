@@ -58,6 +58,16 @@ align-items: center;
 padding: 1rem 3rem;
 transition: 0.3s ease;
 }
+.nav-bar-body span{
+  font-size: 2rem;
+}
+.arrow-back-icon{
+  margin-left: -2rem;
+  color: rgb(54, 45, 45);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
 
 .nav-bar-body-left,
 .nav-bar-body-right {
