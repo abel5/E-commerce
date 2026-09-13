@@ -10,9 +10,12 @@ const nextBtn = document.querySelector(".next-btn");
 const arrowBackIcon=document.querySelector(".arrow-back-icon");
 
 const productsDetailSection =document.querySelector(".products-detail-section");
+const homePage=document.querySelector(".home-page");
 
 arrowBackIcon.addEventListener("click",()=>{
-if(productsDetailSection.style.display==="block"){
+    productsDetailSection.style.display="none";
+    homePage.style.display="block";
+if(productsDetailSection.classList.contains("show-container")){
     backSection(productsDetailSection);
 }
  

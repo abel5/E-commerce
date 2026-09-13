@@ -424,3 +424,10 @@ overflow: hidden;
 .service-to-help-card-footer:hover {
 transform: scale(1.03);
 }
+
+.hide-container{
+    display: none;
+}
+.show-container{
+    display: flex;
+}

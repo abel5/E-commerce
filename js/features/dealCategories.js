@@ -71,12 +71,13 @@ export function displaySection(section) {
     sneakerListsContainer
 ].forEach(item => {
 
-    item.style.display = "none";
+   
+    item.classList.add("hide-container");
 
 });
 
 
-section.style.display = "flex";
+section.classList.add("show-container");
 
 
 }
@@ -95,12 +96,12 @@ export function backSection(section) {
     sneakerListsContainer
 ].forEach(item => {
 
-    item.style.display = "flex";
+    item.classList.remove("hide-container");
 
 });
 
 
-section.style.display = "none";
+section.classList.remove("show-container");
 
 
 }
