@@ -8,13 +8,24 @@ gadgets: [
         name: "Sony WH-1000XM5 Headphones",
         category: "Headphone",
         price: 3349,
-        image: "headphone-removebg-preview.png",
+        image: "black-headphone.png",
         description: "Premium wireless noise cancelling headphones.",
         reviews: 1245,
         rating: 4.8,
 
         type: "Over-Ear",
-        color: "Black",
+        color:[
+            {name:"black",image:"black-headphone.png" },
+             {name:"white",image:"white-headphone.png"},
+             {name:"red",image:"red-headphone.png"},
+             {name:"blue",image:"blue-headphone.png"}   
+        ],
+        images:[
+            "black-headphone.png",
+             "white-headphone.png",
+             "red-headphone.png",
+             "blue-headphone.png"
+        ],
         material: "Plastic",
         offer: 15,
 
@@ -203,13 +214,24 @@ fashion: [
         name: "Nike Air Max Sneakers",
         category: "Shoe",
         price: 150,
-        image: "running_shoes_PNG5782.png",
+        image: "black-shoe.png",
         description: "Comfortable everyday sneakers with modern design.",
         reviews: 1500,
         rating: 4.7,
 
         type: "Sneakers",
-        color: "White",
+          color:[
+            {name:"black",image:"black-shoe.png" },
+             {name:"white",image:"white-shoe.png"},
+             {name:"gray",image:"gray-shoe.png"},
+             {name:"blue",image:"blue-shoe.png"}   
+        ],
+        images:[
+            "black-shoe.png",
+             "white-shoe.png",
+             "gray-shoe.png",
+             "blue-shoe.png"
+        ],
         material: "Leather",
         offer: 20,
 

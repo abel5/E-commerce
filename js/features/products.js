@@ -1,7 +1,7 @@
 
 import {products,popularCategories} from "../data/products.js";
 import {createProductCard,creatPopularCard,createSearchedCard} from "../components/productCard.js";
-import { hideSections } from "../features/dealCategories.js";
+import { hideSections, hideSectionsTwo } from "../features/dealCategories.js";
 import { categoryDetails } from "../data/products.js";
 import { renderFoundProducts, renderMostSellingProducts, renderTodayBest, renderWeeklyPopularProduct } from "../features/pagination.js";
 import { resetCurrentPage } from "../features/pagination.js";
@@ -38,6 +38,8 @@ const searchResultSection =document.querySelector(".search-results-section");
 const bestDealProductLists=document.querySelector(".best-deal-product-lists");
 const mostSellingProductsList=document.querySelector(".most-selling-products-list");
 const weeklyPopularProductsList=document.querySelector(".weekly-popular-product-lists");
+const specificProductDetailSection=document.querySelector(".specific-product-detail-section");
+
 // GET ALL PRODUCTS
 
 const allProducts=Object.values(products).flat();
@@ -94,6 +96,9 @@ export function renderProducts(products,container){
     const chosedProduct=[...products].slice(0,4);
     chosedProduct.forEach(product => {
         const productCard=createProductCard(product);
+         productCard.addEventListener("click",()=>{
+            hideSectionsTwo(specificProductDetailSection);
+         })
        
         container.appendChild(productCard);
     });
@@ -109,7 +114,9 @@ export function renderPopularProduct(products,container){
     const popularproduct=creatPopularCard(product);
     
     popularproduct.addEventListener("click",()=>{
+       
         resetCurrentPage();
+         hideSections(productsDetailSection);
         openPopularProductDetails(product);
            popularCategoriesSection.classList.remove("pop-cat-section-display");
            popularCategoriesSection.classList.remove("display-agin-popular-category");

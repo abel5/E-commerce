@@ -34,6 +34,8 @@ const gadgetListsContainer =document.querySelector(".gadget-lists-container");
 
 const fashionListsContainer =document.querySelector(".fashion-lists-container");
 
+
+
 dealLinks.forEach(link => {
     link.addEventListener("click", () => {
 
@@ -71,40 +73,16 @@ export function displaySection(section) {
     sneakerListsContainer
 ].forEach(item => {
 
-   
-    item.classList.add("hide-container");
+    item.style.display="none";
 
 });
 
+section.style.display="flex";
 
-section.classList.add("show-container");
 
 
 }
 
-export function backSection(section) {
-
-
-[
-    fashionListsContainer,
-    gadgetListsContainer,
-    toyListsContainer,
-    educationListsContainer,
-    fitnessListsContainer,
-    beautyListsContainer,
-    furnitureListsContainer,
-    sneakerListsContainer
-].forEach(item => {
-
-    item.classList.remove("hide-container");
-
-});
-
-
-section.classList.remove("show-container");
-
-
-}
 
 gadgetLink.addEventListener("click", () => {
 displaySection(gadgetListsContainer);
@@ -149,16 +127,32 @@ const cashBackSectionTwo=document.querySelector(".cash-back-section-2");
 const mostSellingProductContainer=document.querySelector(".most-selling-product-container");
 const trendingProductsContainer=document.querySelector(".trending-products-container");
 const bestSeelingStoreContainer=document.querySelector(".best-seeling-store-container");
-
-
+const productsDetailSection =document.querySelector(".products-detail-section");
+const weeklyPopularProductsContainer=document.querySelector(".weekly-popular-products");
 export function hideSections(section){
     [homePage,topCategoriesContainer,bestDealsContainer,
      chooseByBrandContainer,descountShowContainer,
      cashBackSectionOne,allBestDealListsContainer,
      cashBackSectionTwo,mostSellingProductContainer,
-     trendingProductsContainer,bestSeelingStoreContainer,  
+     trendingProductsContainer,bestSeelingStoreContainer, 
+    
     ].forEach(item=>{
-        item.style.display="none";
+       item.style.display="none";
     })
     section.style.display="block";
 }
+
+export function hideSectionsTwo(section){
+     [homePage,topCategoriesContainer,bestDealsContainer,
+     chooseByBrandContainer,descountShowContainer,
+     cashBackSectionOne,allBestDealListsContainer,
+     cashBackSectionTwo,mostSellingProductContainer,
+     trendingProductsContainer,bestSeelingStoreContainer,  
+      weeklyPopularProductsContainer, productsDetailSection
+    ].forEach(item=>{
+       item.style.display="none";
+    })
+    section.style.display="block";
+
+}
+

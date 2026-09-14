@@ -1,0 +1,182 @@
+
+.specific-product-detail-section{
+    display: flex;
+    flex-direction: column;
+     padding: 1rem 2rem;
+     gap: 1rem;
+}
+.specific-product-contents{
+    display: flex;
+    justify-content: baseline;
+    align-items: start;
+    gap: 8rem;
+   
+}
+.specific-product-gallery{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: baseline;
+    gap: 1rem;
+    width: 500px;
+}
+.specific-product-main-image{
+    background: var(--card-color);
+    border-radius: 8px;
+    padding: 2rem;
+}
+.specific-product-main-image img{
+    width: 300px;
+     user-select: none;
+    -webkit-user-drag: none;
+}
+.specific-product-sub-image{
+    display: flex;
+    gap: 1rem;
+}
+.specific-product-sub-image img{
+    width: 110px;
+    background: var(--card-color);
+    padding: 1rem;
+    border-radius: 6px;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+.specific-product-propertiy-section{
+    width: 700px;
+    padding:  0 1rem;
+}
+.propertiy-header{
+ display: flex;
+ flex-direction: column;
+ gap: 0.5rem;   
+ margin-bottom: 0.5rem;
+}
+.payment-suggestion{
+    margin: 1rem 0;
+}
+.color-container{
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+.color-box{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: red;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.red-color{
+    background: linear-gradient(to bottom, red 50% ,tomato 50%)
+}
+.white-color{
+    background: linear-gradient(to top,rgb(236, 233, 233) 50% ,gray 50%);
+}
+.blue-color{
+    background: linear-gradient(to top,blue 50%,grey 30% );
+}
+.blac-color{
+    background: linear-gradient(to bottom, black 50% ,wheat 10%);
+}
+.quantity-managment-box{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.quantity-set-up{
+    display: flex;
+    gap: 1rem;
+    background: var(--card-color);
+    padding: 0.5rem 1.5rem;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 40px;
+}
+.quantity-set-up button{
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.quantity-set-up input{
+    width: 30px;
+    background: none;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.quantity-set-up input[type="number"]::-webkit-inner-spin-button,
+.quantity-set-up input[type="number"]::-webkit-outer-spin-button
+{
+ -webkit-appearance: none;
+ margin: 0;   
+}
+.buy-add-btn-box{
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+.buy-add-btn-box button{
+    width: 150px;
+}
+.delivery-link-and-logo{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+.deliver-logo{
+    display: flex;
+   gap: 0.5rem;
+   align-items: center;
+    
+}
+.specific-product-detail-footer{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.two-tables-container{
+    display: flex;
+     gap: 2rem;
+    
+}
+.specific-product-table-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 575px;
+    background: var(--card-color);
+    padding: 1rem 15rem 1rem 1rem;
+    border-radius: 5px;
+  
+    
+
+}
+.specific-product-table{
+    width: 530px;
+}
+.specific-product-table .table-contents:nth-of-type(odd){
+background: white;
+
+}
+
+.table-contents{
+display: grid;
+grid-template-columns: 1fr 1fr;
+column-gap: 50px;
+margin-bottom: 1rem;
+width: 100%;
+padding: 10px;
+border-radius: 4px;
+    
+    
+}
