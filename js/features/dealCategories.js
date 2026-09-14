@@ -152,7 +152,7 @@ export function hideSectionsTwo(section){
     ].forEach(item=>{
        item.style.display="none";
     })
-    section.style.display="block";
+    section.style.display="flex";
 
 }
 

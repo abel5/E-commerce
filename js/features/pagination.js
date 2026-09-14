@@ -1,5 +1,6 @@
 import { createProductCard } from "../components/productCard.js";
 import { hideSectionsTwo } from "./dealCategories.js";
+import { renderSpecificProductPage } from "./specificProduct.js";
 
 
 
@@ -37,6 +38,7 @@ export function renderFoundProducts(products, container) {
         
         productCard.addEventListener("click",()=>{
            hideSectionsTwo(specificProductDetailSection);
+           renderSpecificProductPage(product,specificProductDetailSection);
         })
         container.appendChild(productCard);
 
@@ -124,6 +126,7 @@ const filteredProducts=products.filter(product=>product.rating>=4.5);
         const todayProductCard=createProductCard(product);
            todayProductCard.addEventListener("click",()=>{
              hideSectionsTwo(specificProductDetailSection);
+             renderSpecificProductPage(product,specificProductDetailSection);
            })
         container.appendChild(todayProductCard);
         
@@ -142,6 +145,7 @@ export function renderMostSellingProducts(products,container){
                
         mostSellingCard.addEventListener("click",()=>{
             hideSectionsTwo(specificProductDetailSection);
+            renderSpecificProductPage(product,specificProductDetailSection);
         })
         container.appendChild(mostSellingCard);
     })
@@ -159,6 +163,7 @@ chosedProduct.forEach(product=>{
 
        weeklyPopularProducts.addEventListener("click",()=>{
          hideSectionsTwo(specificProductDetailSection);
+         renderSpecificProductPage(product,specificProductDetailSection);
        })
 
     container.appendChild(weeklyPopularProducts);

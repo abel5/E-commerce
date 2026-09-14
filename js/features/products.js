@@ -6,6 +6,7 @@ import { categoryDetails } from "../data/products.js";
 import { renderFoundProducts, renderMostSellingProducts, renderTodayBest, renderWeeklyPopularProduct } from "../features/pagination.js";
 import { resetCurrentPage } from "../features/pagination.js";
 import { resetSearchBar } from "./search.js";
+import { renderSpecificProductPage } from "./specificProduct.js";
 
 // HOMEPAGE CONTAINERS
 const gadgetListsContainer =document.querySelector(".gadget-lists-container");
@@ -98,6 +99,7 @@ export function renderProducts(products,container){
         const productCard=createProductCard(product);
          productCard.addEventListener("click",()=>{
             hideSectionsTwo(specificProductDetailSection);
+            renderSpecificProductPage(product,specificProductDetailSection);
          })
        
         container.appendChild(productCard);
@@ -118,6 +120,7 @@ export function renderPopularProduct(products,container){
         resetCurrentPage();
          hideSections(productsDetailSection);
         openPopularProductDetails(product);
+        
            popularCategoriesSection.classList.remove("pop-cat-section-display");
            popularCategoriesSection.classList.remove("display-agin-popular-category");
            categoryArrow.textContent ="keyboard_arrow_down";
