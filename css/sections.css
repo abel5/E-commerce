@@ -429,5 +429,5 @@ transform: scale(1.03);
     display: none;
 }
 .show-container{
-    display: flex;
+    display: block;
 }
