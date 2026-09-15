@@ -12,14 +12,34 @@ gadgets: [
         description: "Premium wireless noise cancelling headphones.",
         reviews: 1245,
         rating: 4.8,
+        quantity:30,
 
         type: "Over-Ear",
-        color:[
-            {name:"black",image:"black-headphone.png" },
-             {name:"white",image:"white-headphone.png"},
-             {name:"red",image:"red-headphone.png"},
-             {name:"blue",image:"blue-headphone.png"}   
-        ],
+       color: [
+    { 
+        name: "black", 
+        colors: ["black"],
+        image: "black-headphone.png"
+    },
+
+    { 
+        name: "#ccc", 
+        colors: ["#ccc"],
+        image: "white-headphone.png"
+    },
+
+    { 
+        name: "red", 
+        colors: ["red", "black"],
+        image: "red-headphone.png"
+    },
+
+    { 
+        name: "blue", 
+        colors: ["blue","black"],
+        image: "blue-headphone.png"
+    }
+],
         images:[
             "black-headphone.png",
              "white-headphone.png",
@@ -30,7 +50,23 @@ gadgets: [
         offer: 15,
 
         brand: "Sony",
-        inStock: true
+        inStock: true,
+        specifications: {
+
+            general:{
+    model: "WH-1000XM5",
+    connectivity: "Wireless",
+    microphone: "Yes",
+    driverType: "Dynamic",
+    driverSize: "30mm",
+            },
+   details:{
+    numberOfDrivers: 1,
+    waterResistance: "No",
+    weight: "250g",
+    batteryLife: "30 hours"
+   }
+}
     },
 
     {
@@ -218,14 +254,35 @@ fashion: [
         description: "Comfortable everyday sneakers with modern design.",
         reviews: 1500,
         rating: 4.7,
+        quantity:100,
 
         type: "Sneakers",
-          color:[
-            {name:"black",image:"black-shoe.png" },
-             {name:"white",image:"white-shoe.png"},
-             {name:"gray",image:"gray-shoe.png"},
-             {name:"blue",image:"blue-shoe.png"}   
-        ],
+
+        color: [
+    { 
+        name: "black", 
+        colors: ["black"],
+        image: "black-shoe.png"
+    },
+
+    { 
+        name: "wheat", 
+        colors: ["wheat"],
+        image: "white-shoe.png"
+    },
+
+    { 
+        name: "gray", 
+        colors: ["gray", "black"],
+        image: "gray-shoe.png"
+    },
+
+    { 
+        name: "blue", 
+        colors: ["blue"],
+        image: "blue-shoe.png"
+    }
+],
         images:[
             "black-shoe.png",
              "white-shoe.png",
@@ -236,7 +293,19 @@ fashion: [
         offer: 20,
 
         brand: "Nike",
-        inStock: true
+        inStock: true,
+        specifications: {
+    general: {
+        model: "Air Max",
+        gender: "Unisex"
+    },
+
+    details: {
+        soleMaterial: "Rubber",
+        closure: "Lace-Up",
+        weight: "350g"
+    }
+    }
     },
 
     {

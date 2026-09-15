@@ -44,6 +44,8 @@ const specificProductDetailSection=document.querySelector(".specific-product-det
 // GET ALL PRODUCTS
 
 const allProducts=Object.values(products).flat();
+
+;
 let currentCategoryProducts=[];
 const activeFilters={
     type: null,
@@ -100,6 +102,7 @@ export function renderProducts(products,container){
          productCard.addEventListener("click",()=>{
             hideSectionsTwo(specificProductDetailSection);
             renderSpecificProductPage(product,specificProductDetailSection);
+            
          })
        
         container.appendChild(productCard);
