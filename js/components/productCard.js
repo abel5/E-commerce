@@ -1,95 +1,98 @@
-// =====================================
-// NORMAL PRODUCT CARD
-// =====================================
+import { renderReviewItems, renderCartProduct, updateCartSummary } from "../features/checkout.js";
+import { navigateFavorites, navigateCheckout, hideSectionsThree } from "../features/dealCategories.js";
+import { renderProducts } from "../features/products.js";
 
+const productCheckoutSection = document.querySelector(".product-checkout-section");
+const reviewItemShippingContainer = document.querySelector(".review-item-shipping-container-box");
+const cartMainContentsContainer = document.querySelector(".cart-main-contents-container");
+const numberOfProductsInCart = document.getElementById("products-in-cart");
+const favCounter = document.querySelector(".fav-counter");
 
-export function createProductCard(product) {
-
-
-const productCard =
-    document.createElement("div");
-
-productCard.classList.add(
-    "product-card"
+let cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
+let favProducts = JSON.parse(localStorage.getItem("favProducts")) || [];
+let quantityInCart = cartProducts.reduce(
+    (total, product) => total + product.cartQuantity,
+    0
 );
 
+let quantityInFav = favProducts.length;
 
-productCard.innerHTML = `
+if (favCounter) {
+    favCounter.textContent = quantityInFav;
+}
+
+if (numberOfProductsInCart) {
+    numberOfProductsInCart.textContent = quantityInCart;
+}
+
+export function resetCart() {
+    cartProducts.length = 0;
+    quantityInCart = 0;
+
+    if (numberOfProductsInCart) {
+        numberOfProductsInCart.textContent = "0";
+    }
+}
+
+export function showToast(message) {
+
+    const toast = document.createElement("div");
+
+    toast.classList.add("toast");
+    toast.textContent = message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 10);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+
+    }, 2000);
+}
+
+export function createProductCard(product) {
+    const productCard = document.createElement("div");
+
+    productCard.classList.add("product-card");
+    productCard.innerHTML = `
 
     <div class="product-card-header">
-
-        <img
-            src="images/${product.image}"
-            class="product-card-image"
-            alt="${product.name}"
-        >
-
-        <span class="material-symbols-outlined love-icon">
-            favorite
-        </span>
-
+        <img src="${product.image}" class="product-card-image" alt="${product.name}">
+        <span class="material-symbols-outlined love-icon"> favorite</span>
     </div>
-
 
     <div class="product-card-body">
 
         <div class="product-card-body-header">
-
-            <h5>
-                ${product.name}
-            </h5>
-
-            <h5>
-
-                <sup>$</sup>
-                ${product.price}
-                <sup>00</sup>
-
-            </h5>
-
+            <h5>${product.name}</h5>
+            <h5><sup>$</sup>${product.price}<sup>00</sup></h5>
         </div>
-
 
         <div class="product-card-body-body">
 
-            <p>
-                ${product.description}
-            </p>
-
+            <p> ${product.description}</p>
 
             <div class="rate-and-review">
 
                 <div class="rates">
+                    <p>${product.rating}</p>
 
-                    <p>
-                        ${product.rating}
-                    </p>
-
-                    <span class="material-symbols-outlined">
-                        star
-                    </span>
+                <span class="material-symbols-outlined">star</span>
 
                 </div>
 
-
-                <p class="num-of-pep-rate">
-
-                    (${product.reviews})
-                    reviews
-
-                </p>
+                <p class="num-of-pep-rate">(${product.reviews})reviews</p>
 
             </div>
-
-
             <div class="review-and-add-to-cart-btn">
-
-                <button
-                    class="add-to-cart-btn btn"
-                >
-                    Add to Cart
-                </button>
-
+                <button class="add-to-cart-btn btn">Add to Cart</button>
             </div>
 
         </div>
@@ -98,193 +101,215 @@ productCard.innerHTML = `
 
 `;
 
+    const addToCartBtn = productCard.querySelector(".add-to-cart-btn");
+    const loveIcon = productCard.querySelector(".love-icon");
 
-return productCard;
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener("click", (e) => {
 
+            e.stopPropagation();
 
-}
+            showToast("Added to cart!");
+            const alreadyIn = cartProducts.find(item => item.id === product.id);
+            if (alreadyIn) {
+                alreadyIn.cartQuantity++;
+                quantityInCart++;
+                updateCartSummary(cartProducts);
 
-// =====================================
-// POPULAR CATEGORY CARD
-// =====================================
+                const input = cartMainContentsContainer?.querySelector(
+                    `.product-qty-in-cart[data-product-id="${product.id}"]`);
 
-export function creatPopularCard(product) {
+                const price = cartMainContentsContainer?.querySelector(
+                    `.cart-product-price[data-product-id="${product.id}"]`);
 
+                if (input) { input.value = alreadyIn.cartQuantity };
 
-const popularCategory =
-    document.createElement("div");
+                if (price) {
+                    price.textContent = `$${alreadyIn.cartQuantity * alreadyIn.price}`;
+                }
 
+            } else {
 
-popularCategory.classList.add(
-    "popular-category"
-);
+                const cartItem = { ...product, cartQuantity: 1 };
 
+                cartProducts.push(cartItem);
+                quantityInCart++;
 
-popularCategory.innerHTML = `
+                renderCartProduct(cartItem, cartMainContentsContainer, cartProducts);
+            }
+            localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
 
-    <img
-        src="images/${product.image}"
-        alt="${product.name}"
-    >
+            if (numberOfProductsInCart) {
+                numberOfProductsInCart.textContent = quantityInCart;
+            }
 
+        })
+    };
 
-    <div class="name-and-quantity">
+    const alreadyFavorite = favProducts.some(item => item.id === product.id);
 
-        <h4>
-            ${product.name}
-        </h4>
+    if (alreadyFavorite) {
+        loveIcon.classList.add("fav");
+    }
 
-        <h6>
-            ${product.quantity}
-            Items Available
-        </h6>
+    loveIcon.addEventListener("click", (e) => {
 
-    </div>
+        e.stopPropagation();
 
-`;
+        const alreadyFavorite = favProducts.find(item => item.id === product.id);
 
+        if (alreadyFavorite) {
 
-return popularCategory;
+            favProducts = favProducts.filter(item => item.id !== product.id);
+            loveIcon.classList.remove("fav");
+            showToast("Removed from favorites");
 
+        } else {
 
-}
+            favProducts.push(product);
+            loveIcon.classList.add("fav");
+            showToast("Added to favorites");
 
-// =====================================
-// SEARCHED PRODUCT CARD
-// =====================================
+        }
 
-export function createSearchedCard(product) {
+        localStorage.setItem("favProducts", JSON.stringify(favProducts));
+        quantityInFav = favProducts.length;
+        if (favCounter) {
+            favCounter.textContent = quantityInFav;
+        }
+        if (favProductContainer) {
 
-
-const searchedItem =
-    document.createElement("div");
-
-
-searchedItem.classList.add(
-    "searched-item"
-);
-
-
-searchedItem.innerHTML = `
-
-    <div class="searched-item-left">
-
-        <img
-            src="images/${product.image}"
-            alt="${product.name}"
-        >
-
-        <div>
-
-            <h4>
-                ${product.name}
-            </h4>
-
-            <p>
-                ${product.category}
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <div class="searched-item-middle">
-
-        <div class="searched-item-rating">
-
-            <p>
-                ${product.rating}
-            </p>
-
-            <span class="material-symbols-outlined product-Stars">
-                star
-            </span>
-
-        </div>
-
-
-        <p>
-
-            (${product.reviews})
-            reviews
-
-        </p>
-
-    </div>
-
-
-    <h5>
-
-        <sup>$</sup>
-        ${product.price}
-        <sup>00</sup>
-
-    </h5>
-
-`;
-
-
-return searchedItem;
-
-
-}
-
-
-
-export function createspecificProductPage(product) {
-
-    const specificProductContainer =
-        document.createElement("div");
-
-    specificProductContainer.classList.add(
-        "specific-product-detail-container"
-    );
-
-
-    const subImages = product.images.map(image => {
-
-        const img = document.createElement("img");
-
-        img.src = `images/${image}`;
-        img.alt = product.name;
-
-        return img;
+            renderProducts(favProducts, favProductContainer);
+        }
 
     });
 
+    return productCard;
 
-    // =====================================
-    // CREATE PRODUCT HTML
-    // =====================================
+}
 
-    specificProductContainer.innerHTML = `
+const favoriteSection = document.querySelector(".favorite-section");
 
-        <div class="specific-product-header">
+const newThing = document.querySelector(".new-thing");
 
-            <p>
-                ${product.category}/Shop
-                ${product.category} by type/${product.name}
-            </p>
+const homeContainer = document.querySelector(".home-container");
+
+const favProductContainer = document.querySelector(".fav-product-container");
+
+if (newThing) {
+
+    newThing.addEventListener("click", () => {
+        navigateFavorites();
+
+        if (homeContainer) {
+            homeContainer.style.display = "none";
+        }
+        if (favoriteSection) {
+            favoriteSection.style.display = "flex";
+        }
+
+        if (favProductContainer) {
+            renderProducts(
+                favProducts,
+                favProductContainer
+            );
+        }
+
+    });
+
+}
+
+export function creatPopularCard(product) {
+
+    const popularCategory = document.createElement("div");
+
+    popularCategory.classList.add("popular-category");
+    popularCategory.innerHTML = `
+
+    <img src="images/${product.image}" alt="${product.name}">
+
+    <div class="name-and-quantity">
+
+        <h4>${product.name}</h4>
+
+        <h6>${product.quantity}Items Available</h6>
+
+    </div>
+
+`;
+
+    return popularCategory;
+
+}
+
+export function createSearchedCard(product) {
+    const searchedItem =
+        document.createElement("div");
+
+    searchedItem.classList.add("searched-item");
+    searchedItem.innerHTML = `
+    <div class="searched-item-left">
+        <img src="${product.image}" alt="${product.name}">
+        <div><h4>${product.name}</h4>
+       <p> ${product.category}</p>
 
         </div>
 
+    </div>
+
+    <div class="searched-item-middle">
+        <div class="searched-item-rating">
+            <p>${product.rating}</p>
+
+            <span class="material-symbols-outlined product-Stars">star</span>
+        </div>
+
+        <p>(${product.reviews})reviews </p>
+
+    </div>
+
+    <h5><sup>$</sup>${product.price}<sup>00</sup></h5>
+
+`;
+    return searchedItem;
+
+}
+
+export function createspecificProductPage(product) {
+    let productQuantity = 1;
+    const specificProductContainer = document.createElement("div");
+    specificProductContainer.classList.add("specific-product-detail-container");
+
+    const subImages = product.images.map(image => {
+        const img = document.createElement("img");
+        img.src = image.startsWith("http") ? image : `images/${image}`;
+
+        img.alt = product.name;
+
+        img.dataset.image = image;
+
+        return img;
+    });
+
+    specificProductContainer.innerHTML = `
+        <div class="specific-product-header">
+
+            <p>${product.category}/Shop${product.category} by type/${product.name}</p>
+
+        </div>
 
         <div class="specific-product-contents">
-
-
-            <!-- ==========================
-                 PRODUCT GALLERY
-            =========================== -->
 
             <div class="specific-product-gallery">
 
                 <div class="specific-product-main-image">
 
-        <img class="main-image"src="images/${product.image}"alt="${product.name}" >
+                    <img class="main-image" src="${product.image.startsWith("http")
+            ? product.image : `images/${product.image}`
+
+        }" alt="${product.name}">
 
                 </div>
-
 
                 <div class="specific-product-sub-image">
 
@@ -292,99 +317,69 @@ export function createspecificProductPage(product) {
 
             </div>
 
-
-            <!-- ==========================
-                 PRODUCT INFORMATION
-            =========================== -->
-
             <div class="specific-product-propertiy-section">
-
 
                 <div class="propertiy-header">
 
-                    <h2 class="specific-product-name">${product.name}</h2>
+                    <h2 class="specific-product-name">
+                        ${product.name}
+                    </h2>
 
-            <p class="specific-product-discription">${product.description}</p>
+                    <p class="specific-product-discription">
+                        ${product.description}
+                    </p>
 
-         <p class="specific-product-rating-and-viewes">⭐${product.rating}
-                        (${product.reviews})</p>
-
-                </div>
-
-
-                <div class="payment-suggestion">
-
-                    <h3>
-                        $${product.price}.00
-                    </h3>
-
-                    <p>
-                        Suggested payments with 6 months special financing.
+                    <p class="specific-product-rating-and-viewes">
+                        ⭐${product.rating}
+                        (${product.reviews})
                     </p>
 
                 </div>
 
+                <div class="payment-suggestion">
 
-                <!-- COLOR BOXES -->
+                    <h3>$${product.price}.00</h3>
 
+                    <p>Suggested payments with 6 months special financing.</p>
+
+                </div>
                 <div class="color-container">
 
                 </div>
-
-
-                <!-- QUANTITY -->
 
                 <div class="quantity-managment-box">
 
                     <div class="quantity-set-up">
 
-                        <button class="sub-quantity">-</button>
+                        <button class="sub-quantity"> - </button>
 
                         <input type="number" class="buy-quantity" value="1">
 
-                        <button class="add-quantity">+</button>
+                        <button class="add-quantity"> +</button>
 
                     </div>
 
 
-                    <p class="left-quantity">
-
-                        Only
-                        <span style="color: tomato;">
-                            ${product.quantity} items
-                        </span>
-                        Left Don't miss it.
-
+    <p class="left-quantity">Only <span style="color: tomato;">${product.quantity} items</span> 
+                Left Don't miss it.
                     </p>
 
                 </div>
-
-
-                <!-- BUY / CART -->
-
                 <div class="buy-add-btn-box">
 
-                    <button class="btn buy-now-btn">
-                        Buy Now
-                    </button>
+                    <button class="btn buy-now-btn">Buy Now</button>
 
-                    <button class="add-to-cart-btn btn"> Add to Cart</button>
+                    <button class="add-to-cart-btn btn">Add to Cart</button>
 
                 </div>
-
-                <!-- DELIVERY -->
 
                 <div class="delivery-link-and-logo">
 
                     <div class="deliver-logo">
 
-                        <span class="material-symbols-outlined">
-                            local_shipping
-                        </span>
+                        <span class="material-symbols-outlined">local_shipping</span>
 
-                        <p>
-                            Free Delivery
-                        </p>
+                        <p> Free Delivery </p>
 
                     </div>
 
@@ -400,13 +395,9 @@ export function createspecificProductPage(product) {
 
                     <div class="deliver-logo">
 
-                        <span class="material-symbols-outlined">
-                            storefront
-                        </span>
+                        <span class="material-symbols-outlined"> storefront</span>
 
-                        <p>
-                            Return Delivery
-                        </p>
+                        <p> Return Delivery</p>
 
                     </div>
 
@@ -421,15 +412,10 @@ export function createspecificProductPage(product) {
 
                 </div>
 
-
             </div>
 
         </div>
 
-
-        <!-- =====================================
-             SPECIFICATIONS
-        ====================================== -->
 
         <div class="specific-product-detail-footer">
 
@@ -439,31 +425,19 @@ export function createspecificProductPage(product) {
 
 
             <div class="two-tables-container">
-                <!-- ==========================
-                     GENERAL TABLE
-                =========================== -->
 
                 <div class="specific-product-table-container">
 
-                    <h3> General </h3>
-
+                    <h3> General</h3>
 
                     <div class="specific-product-table generals-table">
 
                     </div>
 
                 </div>
-
-
-
-                <!-- ==========================
-                     DETAILS TABLE
-                =========================== -->
-
                 <div class="specific-product-table-container">
 
-                    <h3> Product details</h3>
-
+                    <h3> Product details </h3>
 
                     <div class="specific-product-table detail-table">
 
@@ -471,115 +445,110 @@ export function createspecificProductPage(product) {
 
                 </div>
 
-
             </div>
 
         </div>
 
     `;
 
+    const colorContainer = specificProductContainer.querySelector(".color-container");
 
-    const colorContainer =
-        specificProductContainer.querySelector(
-            ".color-container"
-        );
+    const mainImage = specificProductContainer.querySelector(".main-image");
 
+    const subImageContainer = specificProductContainer.querySelector(".specific-product-sub-image");
 
-    const mainImage =
-        specificProductContainer.querySelector(
-            ".main-image"
-        );
+    let selectedColor = "";
+
+    let selectedImage = product.image;
 
 
-    const subImageContainer =
-        specificProductContainer.querySelector(
-            ".specific-product-sub-image"
-        );
+    if (product.color && product.color.length > 0) {
+        selectedColor = product.color[0].name;
+        selectedImage = product.color[0].image;
 
-    product.color.forEach(color => {
+        product.color.forEach(color => {
 
-        const colorBox =
-            document.createElement("div");
+            const colorBox = document.createElement("div");
 
+            colorBox.classList.add("color-box");
 
-        colorBox.classList.add(
-            "color-box"
-        );
+            if (color.colors.length === 1) {
 
-        // One color
-        if (color.colors.length === 1) {
-
-            colorBox.style.backgroundColor =
-                color.colors[0];
-
-        }
-
-        // Two colors
-        else {
-
-            colorBox.style.background =
-                `linear-gradient(
-                    30deg,
-                    ${color.colors[0]} 50%,
-                    ${color.colors[1]} 50%
-                )`;
-
-        }
-
-        // COLOR CLICK
-
-        colorBox.addEventListener( "click", () => {
-                // Remove previous color active
-
-                const activeColor =colorContainer.querySelector(".active-color-for-color");
-
-                if (activeColor) 
-                    {activeColor.classList.remove("active-color-for-color");
-
-                }
-                // Remove sub-image active
-
-                const activeImage =subImageContainer.querySelector(".active-color");
-
-                if (activeImage) {
-                           activeImage.classList.remove("active-color");
-
-                }
-                // Activate this color
-
-                colorBox.classList.add("active-color-for-color");
-                // Change main image
-
-                mainImage.src =`images/${color.image}`;
+                colorBox.style.backgroundColor = color.colors[0];
 
             }
-        );
+            else {
 
-        colorContainer.appendChild(colorBox);
+                colorBox.style.background = `linear-gradient( 30deg, ${color.colors[0]} 50%,${color.colors[1]} 50% )`;
 
-    });
+            }
+
+            colorBox.addEventListener("click", () => {
+
+                selectedColor = color.name;
+                selectedImage = color.image;
+
+                const activeColor = colorContainer.querySelector(".active-color-for-color");
+
+                if (activeColor) {
+                    activeColor.classList.remove("active-color-for-color");
+                }
+
+                colorBox.classList.add("active-color-for-color"
+                );
+
+                mainImage.src = color.image.startsWith("http") ? color.image : `images/${color.image}`;
+
+            });
+
+            colorContainer.appendChild(colorBox);
+
+        });
+
+    } else {
+
+        colorContainer.innerHTML = "";
+
+    }
 
     subImages.forEach(image => {
-        subImageContainer.appendChild(image);
-        image.addEventListener("click",() => {
-                // Change main image
-                mainImage.src =image.src;
-                // Remove previous image active
 
-    const activeImage =subImageContainer.querySelector(".active-color");
+        subImageContainer.appendChild(
+            image
+        );
 
-                if (activeImage) {
-                     activeImage.classList.remove("active-color");
+        image.addEventListener(
+            "click",
+            () => {
+
+                mainImage.src = image.src;
+                const selected = product.color?.find(color => color.image === image.dataset.image);
+
+                if (selected) {
+
+                    selectedColor = selected.name;
+
+                    selectedImage = selected.image;
 
                 }
-                // Remove color active
 
-    const activeColor =colorContainer.querySelector(".active-color-for-color");
+
+                const activeImage = subImageContainer.querySelector(".active-color");
+
+                if (activeImage) {
+
+                    activeImage.classList.remove("active-color");
+
+                }
+                const activeColor = colorContainer.querySelector(".active-color-for-color");
+
+
                 if (activeColor) {
 
                     activeColor.classList.remove("active-color-for-color");
+
                 }
-                // Activate this image
+
                 image.classList.add("active-color");
 
             }
@@ -587,80 +556,247 @@ export function createspecificProductPage(product) {
 
     });
 
+    const buyNowBtn = specificProductContainer.querySelector(".buy-now-btn");
 
-    const generalTable =
-        specificProductContainer.querySelector(
-            ".generals-table"
+
+    const totalPrice = document.getElementById(
+        "total-price"
+    );
+
+    const subTotal = document.getElementById("sub-total");
+    const payBtn = document.querySelector(".pay-btn");
+    const tax = document.getElementById("tax");
+
+    if (buyNowBtn) {
+        buyNowBtn.addEventListener("click", () => {
+
+            let sTotal = product.price * productQuantity;
+            subTotal.textContent = `$${sTotal}.00`;
+
+            let totalTax = Math.floor(sTotal * 10 / 100);
+
+            tax.textContent = `$${totalTax}.00`;
+
+            let totalPay = sTotal + totalTax;
+
+            totalPrice.textContent = `=$${totalPay}.00`;
+
+            if (payBtn) {
+
+                payBtn.textContent = `Pay $${totalPay}.00`;
+
+            }
+
+            navigateCheckout();
+
+
+            hideSectionsThree(productCheckoutSection);
+
+
+            renderReviewItems(product, reviewItemShippingContainer, selectedColor, selectedImage, productQuantity);
+
+        }
         );
 
-    const detailTable =
-        specificProductContainer.querySelector(
-            ".detail-table"
-        );
+    }
+
+    const generalTable = specificProductContainer.querySelector(".generals-table");
+    const detailTable = specificProductContainer.querySelector(".detail-table");
 
     function formatSpecificationName(name) {
 
-    // Add a space before every capital letter
-    let formattedName = name.replace(/([A-Z])/g, " $1");
+        let formattedName = name.replace(/([A-Z])/g, " $1");
 
- 
-    formattedName=formattedName.charAt(0).toUpperCase() +
-    formattedName.slice(1);
 
-    return formattedName;
-}
+        formattedName = formattedName.charAt(0).toUpperCase() + formattedName.slice(1);
 
-    function createSpecificationRow(key,value) {
-        const row =document.createElement("div");
+        return formattedName;
+
+    }
+
+
+    function createSpecificationRow(key, value) {
+
+        const row = document.createElement("div");
+
         row.classList.add("table-contents");
         row.innerHTML = `
 
-            <p>${formatSpecificationName(key)} </p>
+            <p> ${formatSpecificationName(key)} </p>
 
-            <p>${value}</p>
+            <p>${value} </p>
 
         `;
+
 
         return row;
 
     }
 
-    Object.entries(product.specifications.general).forEach(([key, value]) => {
 
-        const row =createSpecificationRow(key,value);
-        generalTable.appendChild(row);
+    if (product.specifications?.general) {
 
-    });
-
-
-    Object.entries(product.specifications.details).forEach(([key, value]) => {
-        const row =createSpecificationRow(key,value);
-        detailTable.appendChild(row);
-
-    });
-    let productQuantity = 1;
-    const subQuantity =specificProductContainer.querySelector(".sub-quantity");
-    const buyQuantity =specificProductContainer.querySelector(".buy-quantity");
-    const addQuantity =specificProductContainer.querySelector(".add-quantity");
-
-    subQuantity.addEventListener("click",() => {
-            if (productQuantity > 1) {
-                productQuantity--;
-                buyQuantity.value=productQuantity;
+        Object.entries(product.specifications.general).forEach(
+            ([key, value]) => {
+                const row = createSpecificationRow(key, value);
+                generalTable.appendChild(row);
 
             }
+        );
+
+    }
+
+
+    if (product.specifications?.details) {
+
+        Object.entries(product.specifications.details).forEach(
+            ([key, value]) => {
+                const row = createSpecificationRow(key, value);
+                detailTable.appendChild(row
+                );
+
+            }
+        );
+
+    }
+
+
+    const subQuantity = specificProductContainer.querySelector(".sub-quantity");
+    const buyQuantity = specificProductContainer.querySelector(".buy-quantity");
+    const addQuantity = specificProductContainer.querySelector(".add-quantity");
+
+    subQuantity.addEventListener("click", () => {
+        if (productQuantity > 1) {
+            productQuantity--;
+            buyQuantity.value = productQuantity;
+
+            localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+
         }
+
+    }
     );
 
 
-    addQuantity.addEventListener("click",() => {
-            if (productQuantity<product.quantity) {
-                productQuantity++;
-                buyQuantity.value=productQuantity;
-            }
+    addQuantity.addEventListener("click", () => {
+
+        if (productQuantity < product.quantity) {
+            productQuantity++;
+            buyQuantity.value = productQuantity;
+            localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+
         }
+
+    }
     );
+
+
+    const addToCartBtn = specificProductContainer.querySelector(".add-to-cart-btn");
+
+    addToCartBtn.addEventListener("click", (e) => {
+
+        e.stopPropagation();
+
+        const alreadyIn = cartProducts.find(item => item.id === product.id);
+
+        if (alreadyIn) {
+
+            alreadyIn.cartQuantity += productQuantity;
+
+            quantityInCart += productQuantity;
+
+            updateCartSummary(cartProducts);
+
+            const input = cartMainContentsContainer.querySelector(`.product-qty-in-cart[data-product-id="${product.id}"]`);
+            const price = cartMainContentsContainer.querySelector(`.cart-product-price[data-product-id="${product.id}"]`);
+
+
+            if (input) {
+
+                input.value =alreadyIn.cartQuantity;
+
+            }
+
+            if (price) {
+
+                price.textContent =`${alreadyIn.cartQuantity *alreadyIn.price}`;
+
+            }
+
+        }
+
+        else {
+
+            const cartItem = {
+                ...product,
+                cartQuantity:productQuantity,
+                selectedColor:selectedColor,
+                selectedImage:selectedImage
+
+            };
+
+            cartProducts.push(cartItem);
+            quantityInCart +=productQuantity;
+
+            renderCartProduct(cartItem,cartMainContentsContainer,cartProducts);
+
+        }
+
+        localStorage.setItem("cartProducts",JSON.stringify(cartProducts)
+        );
+
+
+        if (numberOfProductsInCart) {
+            numberOfProductsInCart.textContent =quantityInCart;
+
+        }
+
+    }
+    );
+
 
     return specificProductContainer;
+}
+
+
+export function createReviewItem(product, selectedColor, selectedImage, productQuantity) {
+
+    const reviewItemShippingContainer = document.createElement("div");
+
+    reviewItemShippingContainer.classList.add("review-item-shipping-container");
+
+    reviewItemShippingContainer.innerHTML = `
+    
+        <h5>Review Item And Shipping</h5>
+
+        <div class="review-shpping-body">
+
+            <div class="review-shpping-body-left">
+
+                <img src="${selectedImage}" alt="">
+
+                <div class="reviw-shipping-body-right-left">
+
+                    <h4> ${product.name}</h4>
+
+                    <p>color: ${selectedColor}</p>
+
+                </div>
+
+            </div>
+
+            <div class="reviw-shipping-body-right">
+
+                <h3>$${product.price}</h3>
+
+                <p>Quantity: ${productQuantity}</p>
+
+            </div>
+
+        </div>
+
+    `
+
+    return reviewItemShippingContainer;
 
 }

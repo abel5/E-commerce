@@ -49,11 +49,11 @@ align-items: center;
 }
 
 .main-logo-at-footer img {
-width: 100px;
+width: 80px;
 }
 
 .main-logo-at-footer h2 {
-font-size: 3rem;
+font-size: 2rem;
 }
 
 .payment-list-box {
@@ -64,8 +64,9 @@ margin-top: 2rem 0;
 }
 
 .payment-lists {
-display: grid;
-grid-template-columns: repeat(8, 1fr);
+display: flex;
+gap: 1rem;
+flex-wrap: wrap;
 border-bottom: 1px solid #ccc;
 padding-bottom: 1rem;
 }
@@ -79,14 +80,15 @@ cursor: pointer;
 margin-top: 1rem;
 }
 
-.amazon {
-padding: 10px;
+.visa{
+    height: 65px;
 }
 
 .gift-and-other-links {
 display: flex;
 gap: 1rem;
 align-items: center;
+flex-wrap: wrap;
 }
 
 .icon-and-p {

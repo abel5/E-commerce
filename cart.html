@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block">
+   
+</head>
+<body>
+
+    <main class="cart-section">
+        
+        <h2 class="cart-section-header">Your cart</h2>
+            <div class="checkout-progress">
+                <a href="e-commerce.html" class="home-step " style="text-decoration: none;">Home</a>
+                <span class="checkout-arrow">></span>
+                <span class="checkout-step checkout-your-cart active-step">Your Cart</span>
+                <span class="checkout-arrow">></span>
+                <span class="checkout-step checkout-shipping">Shipping</span>
+                <span class="checkout-arrow">></span>
+                <span class="checkout-step checkout-payment">Payment</span>
+            </div>
+            
+            <div class="cart-section-body">
+                <div class="cart-section-body-header">
+                    <h4 class="your-cart-container cart-head active-head">Your cart</h4>
+                    <h4 class="shipping-detail-container cart-head">Shipping & details</h4>
+                    <h4 class="payment-section-container cart-head">Payment</h4>
+                </div>
+            </div>
+            <div class="your-cart-contents">
+                <div class="cart-main-contents-container">
+
+
+
+                </div>
+                <p class="empty-cart-message" style="display: none;">No Added Products here;</p>
+
+                <div class="cart-Totals-Card">
+                    <h4>Cart totals</h4>
+                    <div class="cart-totals-card-body">
+                        <div class="cart-total-key-value">
+                            <p>Subtotal</p>
+                            <p class="cart-sub-total">$0.00</p>
+                        </div>
+                        <div class="cart-total-key-value">
+                            <p>Shipping</p>
+                            <p class="cart-shipping">$0.00</p>
+                        </div>
+                        <div class="cart-total-key-value">
+                            <p>Tax</p>
+                            <p class="cart-tax">$0.00</p>
+                        </div>
+                        <div class="cart-total-key-value">
+                            <p>Discount</p>
+                            <p class="cart-discount">$0.00</p>
+                        </div>
+                    </div>
+                    <div class="cart-total-key-value whole-cart-total">
+                        <h5>Total</h5>
+                        <p class="cart-total">$0.00</p>
+                    </div>
+                    <button class="checkout-btn">Checkout</button>
+                </div>
+            </div>
+
+            <div class="shipping-detail-contents" style="display: none;">
+                <button class="back-to-cart-btn"><</button>
+                <div class="delivery-information-container delivery-info-container-in-cart">
+
+                    <div class="checkbox-container">
+                        <input type="checkbox" class="my-checkbox"> Returning Customer?
+                    </div>
+
+                    <form class="delivery-info-formes">
+                        <div class="delivery-info-forms-header">
+                            <h3>Delivery Information</h3>
+                            <p class="save-info">Save Information</p>
+                        </div>
+                        <div class="delivery-info-forms-body delivery-info-bofy-in-cart">
+                            <div class="fullname-labels lab-hide">
+                                <div>
+                                    <label for="firstname">First Name*</label>
+                                    <input type="text" placeholder="Type here..." required>
+                                </div>
+                                <div>
+                                    <label for="lastname">Last Name*</label>
+                                    <input type="text" placeholder="Type here..." required>
+                                </div>
+
+                            </div>
+
+                            <div class="address-label-box lab-hide">
+                                <label for="address">Address*</label>
+                                <input type="text" placeholder="Type here..." required>
+                            </div>
+
+                            <div class="city-zip-code-labels lab-hide">
+
+                                <div>
+                                    <label for="city">City Twon*</label>
+                                    <input type="text" placeholder="Type here..." required>
+                                </div>
+
+                                <div>
+                                    <label for="zipcode">Zip Code*</label>
+                                    <input type="text" placeholder="Type here..." required>
+                                </div>
+                            </div>
+
+                            <div class="mobile-email-labels lab-hide">
+                                <div>
+                                    <label for="phone">Mobile*</label>
+                                    <input type="tel" placeholder="Type here..." required>
+                                </div>
+
+                                <div>
+                                    <label for="email">Email*</label>
+                                    <input type="email" placeholder="Type here..." required>
+                                </div>
+
+                            </div>
+                            <div class="delivery-info-in-short" style="display: none;">
+                                <h5>Abel Birhanu</h5>
+                                <h6>4140 parker Rd.Allentown,New Mexico 31134</h6>
+                                <h6>+7767383743568</h6>
+                                <h6>Abel@mail.com</h6>
+                            </div>
+                        </div>
+                        <button type="button" class="continue-to-payment btn btns">Go To Pay</button>
+                    </form>
+
+
+
+                </div>
+            </div>
+
+            <div class="payment-contents order-summery-box" style="display: none;">
+                <button class="back-to-shipping-btn"><</button>
+                <div class="order-summery-container order-summery-in-cart">
+                    <h2>Order Summery</h2>
+                    <div class="inter-coupon-box">
+                        <input type="text" id="coupon-code-in-cart" placeholder="Enter Coupon Code">
+                        <button class="apply-coupon-btn btn">Apply coupon</button>
+                    </div>
+
+                    <div class="payment-detail-container  payment-detail-body-in-cart">
+
+
+                        <h3>Payment Details</h3>
+                        <div class="payment-detail-container-body">
+
+                            <div>
+                                <input type="radio" name="cart-payment" value="cash"> Cash on Delivery
+                            </div>
+
+                            <div>
+                                <input type="radio" name="cart-payment" value="card"> Shopcart Card
+                            </div>
+
+                            <div>
+                                <input type="radio" name="cart-payment" value="paypal"> Paypal
+                            </div>
+
+                            <div>
+                                <input type="radio" name="cart-payment" value="masterCard"> Credit or Debit card
+                            </div>
+
+                            <div class="payment-logos">
+                                <img src="logo/file_00000000486881fba9e13c8b9e871b1a.png" alt="">
+                                <img src="logo/file_00000000486881fba9e13c8b9e871b1a.png" alt="">
+                                <img src="logo/file_00000000486881fba9e13c8b9e871b1a.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="payment-detail-container-footer-forms">
+                            <form class="payment-details-form">
+                                <label for="email">Email*</label>
+                                <input type="email" placeholder="Type here...." required>
+                                <label for="username">Card Holder Name*</label>
+                                <input type="text" placeholder="Type here..." required>
+                                <label for="card-number">Card Numbeer*</label>
+                                <div class="card-number-input-box ">
+                                    <input type="number" placeholder="000****1245" required>
+                                    <span class="material-symbols-outlined wallet-icon">
+                                        account_balance_wallet
+                                    </span>
+                                </div>
+
+                                <div class="expiry-and-cvs-forms ">
+                                    <div>
+                                        <label for="expiry">Expiry</label>
+                                        <input type="date" class="date-in-cart" required>
+                                    </div>
+
+                                    <div>
+                                        <label for="cvc">CVC</label>
+                                        <input type="number" class="cvc-in-cart" placeholder="00" required>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                            <button type="button" class="pay-btn btn btns">Pay $255.10</button>
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </main>
+        <div class="order-submit-pop-up-box">
+    <div class="pop-up-container">
+        <div class="pop-up-icon-box">
+            <span class="material-symbols-outlined check-icon">
+                check
+            </span>
+        </div>
+
+        <div class="pop-up-body">
+            <h3>Your order has been accepted</h3>
+            <h6>Transaction ID:66647876647</h6>
+            <button class="continue-shoping-btn">
+                Continue Shopping
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="module" src="js/main.js"></script>
+</html>

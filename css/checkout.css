@@ -1,0 +1,354 @@
+.product-checkout-forms-container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 1;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 1400px;
+}
+.review-shipping-order-summery-container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1rem;
+    align-items: start;
+}
+.review-shipping-delivery-container{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+   
+}
+.review-item-shipping-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 1rem;
+}
+.review-shpping-body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+.review-shpping-body-left{
+    display: flex;
+  gap: 1rem;
+    align-items: center;
+}
+
+.review-shpping-body img{
+    width: 100px;
+    background: var(--card-color);
+    padding: 1rem;
+    border-radius: 6px;
+}
+.delivery-information-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+   
+  
+}
+.delivery-info-formes{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 6px;
+
+}
+.delivery-info-forms-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.delivery-info-forms-body label{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.delivery-info-forms-body input{
+    margin: 1rem 0 ;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+.delivery-info-bofy-in-buy-now input{
+    width: 100%;
+    min-width: 260px;
+}
+.delivery-info-bofy-in-cart input{
+    width: 100%;
+   min-width: 0;
+
+}
+
+.delivery-info-forms-body input:focus{
+ border: 1px solid red;
+}
+.fullname-labels label{
+    display: flex;
+    flex-direction: column
+   
+}
+.fullname-labels{
+    display:flex ;
+    justify-content: space-between;
+}
+.address-label-box label{
+    display: block;
+}
+.city-zip-code-labels{
+    display: flex;
+    justify-content: space-between;
+}
+.mobile-email-labels{
+    display: flex;
+    justify-content: space-between;
+}
+.order-summery-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 6px;
+}
+.inter-coupon-box{
+    position: relative;
+    outline: none;
+    border-top: 1px solid #f2eeee;
+     border-bottom: 1px solid #f2eeee;
+    padding-top: 1rem;
+     padding-bottom: 1rem;
+   
+
+    
+}
+#coupon-code{
+    width: 100%;
+    background: #f8f6f6;
+    border: none;
+    padding: 10px;
+      border-radius: 20px;
+      outline: none;
+
+}
+.apply-coupon-btn{
+    position: absolute;
+    right: 0;
+}
+.payment-detail-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-bottom: 1px solid #f8f6f6;
+    padding-bottom: 1rem;
+}
+.payment-detail-container-body{
+    display: flex;
+   flex-direction: column;
+   gap: 0.3rem; 
+}
+.payment-logos{
+    display: flex;
+    gap: 0.3rem;
+}
+.payment-logos img{
+    width: 60px;
+    background: #ccc;
+    padding: 5px;
+    border-radius: 6px;
+}
+.payment-details-form label{
+    display:block ;
+}
+.payment-details-form input{
+    width: 100%;
+     min-width: 260px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+   outline: none;
+   transition: 0.3s;
+   margin:1rem 0;
+}
+.card-number-input-box{
+    position: relative;
+}
+.card-number-input-box input{
+padding: 10px 10px 10px 50px;
+}
+.wallet-icon{
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7b7979;
+}
+.payment-details-form input:focus{
+ border: 1px solid red;
+}
+.expiry-and-cvs-forms{
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+.price-calculation-box-body{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0 1rem 0;
+    
+}
+.price-key-and-value{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.price-calculation-box-footer{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-top: 1px solid #f2eeee;
+    padding-top: 1rem;
+}
+.price-calculation-box-footer p{
+    font-weight: 600;
+}
+.pay-btn{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+.learn-more-suggestion-card{
+    background: rgb(255, 242, 213);
+    margin-top: 1rem;
+    border-radius: 12px;
+    padding: 1rem;
+}
+.order-submit-pop-up-box{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100000;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center ;
+    
+}
+.pop-up-container{
+    width: 400px;
+    padding: 4rem 2rem 2rem 2rem;
+    border-radius: 12px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    
+}
+.pop-up-container::before{
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    top: -80px;
+    left: 0;
+    background: linear-gradient(130deg,#8aa8ff 60%,#9affb0 40%);
+    filter: blur(40px);
+    opacity: 0.8;
+    z-index: -1;
+}
+
+.pop-up-icon-box span{
+
+    font-size: 3rem;
+    background: rgb(108, 255, 108);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.5rem solid white;
+     margin-bottom: 2.5rem;
+     color: white;
+     font-weight: 1000;
+     z-index: 1;
+}
+.pop-up-body{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+.continue-shoping-btn{
+    width: 70%;
+    max-width: 150px;
+    padding: 10px;
+    border: none;
+    background: rgb(254, 145, 1);
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+    color: white;
+    font-weight: 600;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+.continue-shoping-btn:hover{
+    background:rgb(228, 129, 0);
+}
+.save-info{
+    background: var(--card-color);
+    padding: 5px 10px;
+    border-radius: 20px;
+    min-width: 80px;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.save-info:hover{
+    background: ghostwhite;
+}
+.delivery-info-in-short{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  
+
+}
+.address-label-box{
+    display: flex;
+    flex-direction: column;
+
+}
+.ifno-display{
+    display: flex;
+}

@@ -1,0 +1,288 @@
+/* ========================================
+   API ERROR SCREEN
+======================================== */
+
+.products-api-error {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    background: #ffffff;
+
+    z-index: 999999;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 1.5rem;
+    box-sizing: border-box;
+
+    text-align: center;
+}
+
+
+/* ========================================
+   ERROR CONTENT
+======================================== */
+
+.api-error-content {
+
+    width: 100%;
+    max-width: 500px;
+
+    padding: 2.5rem 2rem;
+
+    box-sizing: border-box;
+
+    border-radius: 16px;
+
+    background: #f5f5f5;
+}
+
+
+/* ========================================
+   ERROR ICON
+======================================== */
+
+.api-error-content .material-symbols-outlined {
+
+    font-size: 4rem;
+
+    margin-bottom: 1rem;
+}
+
+
+/* ========================================
+   ERROR TITLE
+======================================== */
+
+.api-error-content h3 {
+
+    margin: 0 0 0.75rem;
+
+    font-size: 1.5rem;
+}
+
+
+/* ========================================
+   ERROR MESSAGE
+======================================== */
+
+.api-error-content p {
+
+    margin: 0 0 1.5rem;
+
+    line-height: 1.6;
+
+    color: #555;
+}
+
+
+/* ========================================
+   RETRY BUTTON
+======================================== */
+
+.retry-api-btn {
+
+    padding: 0.75rem 1.5rem;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   GENERAL ERROR TOAST
+   ========================================================= */
+
+.error-toast {
+
+    position: fixed;
+
+    right: 20px;
+
+    bottom: 20px;
+
+    width: max-content;
+
+    max-width: 350px;
+
+    padding: 1rem 1.25rem;
+
+    background: #333;
+
+    color: white;
+
+    border-radius: 8px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(20px);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+
+    z-index: 999999;
+
+}
+
+
+/* SHOW TOAST */
+
+.error-toast.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+}
+
+
+/* =========================================================
+   FILTER DROPDOWN SAFETY
+   ========================================================= */
+
+.product-filter-dropdown {
+
+    position: absolute;
+
+    z-index: 99999;
+
+}
+
+
+/* =========================================================
+   MOBILE ERROR TOAST
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .products-api-error {
+        padding: 1rem;
+    }
+
+    .api-error-content {
+        padding: 2rem 1.25rem;
+    }
+
+    .api-error-content .material-symbols-outlined {
+        font-size: 3.5rem;
+    }
+
+    .api-error-content h3 {
+        font-size: 1.25rem;
+    }
+
+}
+
+.products-api-loading {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    background: #ffffff;
+
+    z-index: 999998;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+
+.api-loading-content {
+    width: 100%;
+    max-width: 500px;
+
+    padding: 2.5rem 2rem;
+
+    box-sizing: border-box;
+
+    border-radius: 16px;
+
+    background: #f5f5f5;
+
+    text-align: center;
+}
+
+
+.api-spinner {
+    width: 45px;
+    height: 45px;
+
+    margin: 0 auto 1.5rem;
+
+    border: 4px solid #ddd;
+
+    border-top-color: #034c36;
+
+    border-radius: 50%;
+
+    animation: apiLoadingSpin 0.8s linear infinite;
+}
+
+
+.api-loading-content h3 {
+    margin: 0 0 0.75rem;
+
+    font-size: 1.5rem;
+}
+
+
+.api-loading-content p {
+    margin: 0;
+
+    line-height: 1.6;
+
+    color: #555;
+}
+
+
+@keyframes apiLoadingSpin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .api-loading-content {
+        padding: 2rem 1.25rem;
+    }
+
+    .api-loading-content h3 {
+        font-size: 1.25rem;
+    }
+
+}
+
+

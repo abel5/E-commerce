@@ -2,12 +2,13 @@
 display: flex;
 flex-direction: column;
 gap: 1rem;
-padding: 2rem 1rem 2rem 2rem;
+padding: 2rem;
 }
 
 .top-categories {
 display: grid;
 grid-template-columns: repeat(6, 1fr);
+gap: 1rem;
 }
 
 .top-category {
@@ -15,7 +16,7 @@ background-image: url("../images/furniture.jpg");
 background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
-width: 180px;
+
 height: 200px;
 text-align: center;
 color: var(--white-color);
@@ -23,32 +24,33 @@ border-radius: 8px;
 padding: 1rem;
 cursor: pointer;
 transition: 0.3s ease;
+
 }
 
 .top-category:hover {
 transform: scale(1.03);
 }
 
-.hand-bag {
+.top-hand-bag {
 background-image: url("../images/hand\ bag.jpg");
 }
 
-.books {
-background-image: url("../images/book2.jpg");
-color: black;
+.top-books {
+background-image: url("../images/watch-mockup.jpg");
+
 }
 
-.tech {
-background-image: url("../images/tech.jpg");
-color: black;
+.top-tech {
+background-image: url("../images/pc-mockup.jpg");
+
 }
 
-.sneakers {
+.top-sneakers {
 background-image: url("../images/sneakers.jpg");
 }
 
-.travel {
-background-image: url("../images/travel2.jpg");
+.top-travel {
+background-image: url("../images/phone-mockup.jpg");
 }
 
 .popular-categories-section{

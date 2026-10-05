@@ -1,24 +1,15 @@
 import { createspecificProductPage } from "../components/productCard.js";
-import { products } from "../data/products.js";
 
+export function renderSpecificProductPage(product, container) {
 
-const allProducts=Object.values(products).flat();
+    if (!container) return;
 
+    container.innerHTML = "";
 
-export function renderSpecificProductPage(product,container){
-    if(!container) return;
-    container.innerHTML="";
-
-   const currentProductData=allProducts.find(item=>
-        item.id===product.id
-    );
- 
-     if (!currentProductData) {
+    if (!product) {
         console.log("Product not found:", product);
         return;
     }
-        container.appendChild(createspecificProductPage(currentProductData));    
 
-
+    container.appendChild(createspecificProductPage(product));
 }
-
